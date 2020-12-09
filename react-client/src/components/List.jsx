@@ -5,8 +5,8 @@ const List = (props) => (
   <div>
     <h4> List Component </h4>
     There are { props.items.length } items.
-    { props.items.map(item => <ListItem item={item}/>)}
+    { props.items.map(item => <ListItem key={item.id} item={item}/>)}
   </div>
-)
+);
 
 export default List;

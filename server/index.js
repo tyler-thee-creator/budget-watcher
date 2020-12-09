@@ -8,17 +8,32 @@ var app = express();
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
-app.get('/items', function (req, res) {
-  items.selectAll(function(err, data) {
-    if(err) {
-      res.sendStatus(500);
-    } else {
-      res.json(data);
-    }
-  });
+var now = new Date();
+var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+var lastSunday = new Date(today.setDate(today.getDate()-today.getDay()));
+
+app.get('/budget', (req, res) => {
+  res.end();
+  // items.selectAll(function(err, data) {
+  //   if(err) {
+  //     res.sendStatus(500);
+  //   } else {
+  //     res.json(data);
+  //   }
+  // });
+});
+
+app.post('/budget', (req, res) => {
+  res.end();
+  // items.selectAll(function(err, data) {
+  //   if(err) {
+  //     res.sendStatus(500);
+  //   } else {
+  //     res.json(data);
+  //   }
+  // });
 });
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
-
