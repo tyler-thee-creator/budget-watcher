@@ -8,6 +8,7 @@ CREATE TABLE historical_log (
   id int NOT NULL AUTO_INCREMENT,
   amount integer NOT NULL,
   description varchar(50) NOT NULL,
+  date datetime NOT NULL,
   PRIMARY KEY (ID)
 );
 
