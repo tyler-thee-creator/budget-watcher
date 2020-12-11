@@ -8,11 +8,13 @@ var app = express();
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
+app.use(bodyParser());
+
 var now = new Date();
 var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 var lastSunday = new Date(today.setDate(today.getDate()-today.getDay()));
 
-app.get('/budget', (req, res) => {
+app.get('/currentWeek', (req, res) => {
   res.end();
   // items.selectAll(function(err, data) {
   //   if(err) {
@@ -23,7 +25,8 @@ app.get('/budget', (req, res) => {
   // });
 });
 
-app.post('/budget', (req, res) => {
+app.post('/log', (req, res) => {
+  console.log(req.body);
   res.end();
   // items.selectAll(function(err, data) {
   //   if(err) {

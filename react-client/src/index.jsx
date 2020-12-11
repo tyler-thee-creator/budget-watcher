@@ -14,6 +14,7 @@ class App extends React.Component {
     }
     this.updateDescription = this.updateDescription.bind(this);
     this.updateAmount = this.updateAmount.bind(this);
+    this.addLog = this.addLog.bind(this);
   }
 
   updateDescription(e) {
@@ -28,10 +29,28 @@ class App extends React.Component {
     });
   }
 
+  addLog(e) {
+    $.ajax({
+      method: 'POST',
+      url: '/log',
+      data: {
+        description: this.state.formSubmitDescription,
+        amount: this.state.formSubmitAmount
+      },
+      success: (data) => {
+
+      },
+      error: () => {
+
+      }
+    });
+    e.preventDefault();
+  }
+
   componentDidMount() {
     $.ajax({
       method: 'GET',
-      url: '/budget',
+      url: '/currentWeek',
       success: (data) => {
         this.setState({
           items: data
@@ -47,7 +66,7 @@ class App extends React.Component {
     return (<div>
       <h1>Budget Watcher</h1>
       <List currentWeekLog={this.state.currentWeekLog}/>
-      <Search updateDescription={this.updateDescription} updateAmount={this.updateAmount}/>
+      <Search updateDescription={this.updateDescription} updateAmount={this.updateAmount} addLog={this.addLog}/>
     </div>)
   }
 }

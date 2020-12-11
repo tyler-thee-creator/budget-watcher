@@ -1,12 +1,12 @@
-DROP DATABASE IF EXISTS test;
+DROP DATABASE IF EXISTS logs;
 
-CREATE DATABASE test;
+CREATE DATABASE logs;
 
-USE test;
+USE logs;
 
-CREATE TABLE items (
+CREATE TABLE historical_log (
   id int NOT NULL AUTO_INCREMENT,
-  quantity integer NOT NULL,
+  amount integer NOT NULL,
   description varchar(50) NOT NULL,
   PRIMARY KEY (ID)
 );
