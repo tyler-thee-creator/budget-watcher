@@ -10,31 +10,29 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser());
 
 var now = new Date();
+var ok = now.getSeconds();
 var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-var lastSunday = new Date(today.setDate(today.getDate()-today.getDay()));
+var lastSunday = new Date(today.setDate(today.getDate() - today.getDay()));
 
 app.get('/currentWeek', (req, res) => {
-
   res.end();
-  // items.selectAll(function(err, data) {
-  //   if(err) {
-  //     res.sendStatus(500);
-  //   } else {
-  //     res.json(data);
-  //   }
-  // });
 });
 
 app.post('/log', (req, res) => {
-  console.log(req.body);
+  var date = new Date();
+  var currentDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
+  var y = date.getFullYear();
+  var m = date.getMonth().toString().length === 1 ? `0${date.getMonth()}` : date.getMonth();
+  var d = date.getDate().toString().length === 1 ? `0${date.getDate()}` : date.getDate();
+  var h = date.getHours().toString().length === 1 ? `0${date.getHours()}` : date.getHours();
+  var min = date.getMinutes().toString().length === 1 ? `0${date.getMinutes()}` : date.getMinutes();
+  var s = date.getSeconds().toString().length === 1 ? `0${date.getSeconds()}` : date.getSeconds();
+  var currentTimestamp = `${y}-${m + 1}-${d} ${h}:${min}:${s}`
+  console.log(currentTimestamp);
+
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var lastSunday = new Date(today.setDate(today.getDate() - today.getDay()));
   res.end();
-  // items.selectAll(function(err, data) {
-  //   if(err) {
-  //     res.sendStatus(500);
-  //   } else {
-  //     res.json(data);
-  //   }
-  // });
 });
 
 app.listen(3000, function() {
