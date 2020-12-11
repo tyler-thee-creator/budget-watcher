@@ -3,9 +3,8 @@ import ListItem from './ListItem.jsx';
 
 const List = (props) => (
   <div>
-    <h4> List Component </h4>
-    There are { props.items.length } items.
-    { props.items.map(item => <ListItem key={item.id} item={item}/>)}
+    <h4> Current Week Overview: </h4>
+    { props.currentWeekLog.map(stat => <ListItem key={stat.id} stat={stat}/>)}
   </div>
 );
 
