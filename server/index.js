@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var items = require('../database-mysql');
+var db = require('../database-mysql');
 // var items = require('../database-mongo');
 var timestamp = require('./time.js');
 var getCurrentTimestamp = timestamp.getCurrentTimestamp;
@@ -19,8 +19,9 @@ app.get('/currentWeek', (req, res) => {
 app.post('/log', (req, res) => {
   var currentTimestamp = getCurrentTimestamp();
   var lastSundayTimestamp = getLastSundayTimestamp();
-  console.log(lastSundayTimestamp);
-
+  db.insertOne({ amount: req.body.amount, description: "'" + req.body.description + "'", date: "'" + currentTimestamp + "'" }, 'historical_log', (err, res) => {
+    console.log('ERROR', err, 'RES', res);
+  });
   res.end();
 });
 

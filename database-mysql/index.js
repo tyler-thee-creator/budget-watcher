@@ -3,8 +3,8 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'FILL_ME_IN',
-  database : 'test'
+  password : '',
+  database : 'logs'
 });
 
 var selectAll = function(callback) {
@@ -17,4 +17,18 @@ var selectAll = function(callback) {
   });
 };
 
+var insertOne = function(data, table, callback) {
+  console.log(data);
+  var fields = Object.keys(data).join(', ');
+  var values = Object.values(data).join(', ');
+  connection.query(`INSERT INTO ${table} (${fields}) VALUES (${values});`, function(err, results, fields) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
 module.exports.selectAll = selectAll;
+module.exports.insertOne = insertOne;
