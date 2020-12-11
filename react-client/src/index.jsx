@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
-import Search from './components/Search.jsx';
+import Log from './components/Log.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -66,7 +66,7 @@ class App extends React.Component {
     return (<div>
       <h1>Budget Watcher</h1>
       <List currentWeekLog={this.state.currentWeekLog}/>
-      <Search updateDescription={this.updateDescription} updateAmount={this.updateAmount} addLog={this.addLog}/>
+      <Log updateDescription={this.updateDescription} updateAmount={this.updateAmount} addLog={this.addLog}/>
     </div>)
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Search = (props) => (
+const Log = (props) => (
   <div>
     <h4>Log a spend:</h4>
     <form id="log">
@@ -19,4 +19,4 @@ const Search = (props) => (
   </div>
 );
 
-export default Search;
+export default Log;
