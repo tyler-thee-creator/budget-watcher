@@ -23,6 +23,7 @@ class App extends React.Component {
     this.addBudgetItem = this.addBudgetItem.bind(this);
     this.updateBudgetDescription = this.updateBudgetDescription.bind(this);
     this.updateBudgetAmount = this.updateBudgetAmount.bind(this);
+    this.resetBudget = this.resetBudget.bind(this);
   }
 
   updateDescription(e) {
@@ -93,7 +94,6 @@ class App extends React.Component {
         amount: this.state.formSubmitBudgetAmount
       },
       success: (data) => {
-        console.log(data);
         this.setState({
           budgetSettings: data
         });
@@ -103,6 +103,22 @@ class App extends React.Component {
       }
     });
     e.preventDefault();
+  }
+
+  resetBudget() {
+    console.log('got here')
+    $.ajax({
+      method: 'DELETE',
+      url: '/budget',
+      success: (data) => {
+        this.setState({
+          budgetSettings: data
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
   componentDidMount() {
@@ -118,6 +134,19 @@ class App extends React.Component {
         console.log(err);
       }
     });
+
+    $.ajax({
+      method: 'GET',
+      url: '/budget',
+      success: (data) => {
+        this.setState({
+          budgetSettings: data
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
   render () {
@@ -125,7 +154,7 @@ class App extends React.Component {
       <h1>Budget Watcher</h1>
       <Log currentWeekLog={this.state.currentWeekLog}/>
       <LogEntry updateDescription={this.updateDescription} updateAmount={this.updateAmount} addLog={this.addLog} delete={this.deleteMostRecent}/>
-      <Budget budgetSettings={this.state.budgetSettings} addBudgetItem={this.addBudgetItem} updateBudgetDescription={this.updateBudgetDescription} updateBudgetAmount={this.updateBudgetAmount}/>
+      <Budget budgetSettings={this.state.budgetSettings} addBudgetItem={this.addBudgetItem} updateBudgetDescription={this.updateBudgetDescription} updateBudgetAmount={this.updateBudgetAmount} resetBudget={this.resetBudget}/>
     </div>);
   }
 }

@@ -10,9 +10,7 @@ const Budget = (props) => (
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Fake data</td><td>Fake data</td>
-        </tr>
+        {props.budgetSettings.map(item => { return <tr key={item.description}><td>{item.description}</td><td>{'$' + item.amount}</td></tr> })}
       </tbody>
     </table>
     <h4>Add a budget item:</h4>
@@ -30,7 +28,7 @@ const Budget = (props) => (
       </p>
     </form>
     <p>
-      <button id="resetbudget">Reset budget</button>
+      <button id="resetbudget" onClick={props.resetBudget}>Reset budget</button>
     </p>
   </div>
 );

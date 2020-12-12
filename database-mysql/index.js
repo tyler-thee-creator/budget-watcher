@@ -69,9 +69,20 @@ var getAllFromTable = function(table, callback) {
   });
 }
 
+var deleteAllFromTable = function(table, callback) {
+  connection.query(`DELETE FROM ${table};`, function(err, results, fields) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
 module.exports.insertOne = insertOne;
 module.exports.getCurrentWeekStats = getCurrentWeekStats;
 module.exports.getMostRecentId = getMostRecentId;
 module.exports.deleteOne = deleteOne;
 module.exports.getAllFromTable = getAllFromTable;
 module.exports.deleteOneByDescription = deleteOneByDescription;
+module.exports.deleteAllFromTable = deleteAllFromTable;

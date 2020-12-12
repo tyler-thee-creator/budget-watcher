@@ -93,7 +93,38 @@ app.post('/budget', (req, res) => {
               res.send(data);
               res.end();
             }
-          })
+          });
+        }
+      });
+    }
+  });
+});
+
+app.get('/budget', (req, res) => {
+  db.getAllFromTable('budget_settings', (err, data) => {
+    if (err) {
+      res.send(err);
+      res.end();
+    } else {
+      res.send(data);
+      res.end();
+    }
+  });
+});
+
+app.delete('/budget' ,(req, res) => {
+  db.deleteAllFromTable('budget_settings', (err, deleteResponse) => {
+    if (err) {
+      res.send(err);
+      res.end();
+    } else {
+      db.getAllFromTable('budget_settings', (err, data) => {
+        if (err) {
+          res.send(err);
+          res.end();
+        } else {
+          res.send(data);
+          res.end();
         }
       });
     }
