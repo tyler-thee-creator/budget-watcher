@@ -94,8 +94,13 @@ class App extends React.Component {
         amount: this.state.formSubmitBudgetAmount
       },
       success: (data) => {
+        var budgetItems = {};
+        data.map((item) => {
+          budgetItems[item.description] = item.amount;
+        });
         this.setState({
-          budgetSettings: data
+          budgetSettings: budgetItems,
+          currentWeekLog: this.state.currentWeekLog
         });
       },
       error: (err) => {
@@ -138,8 +143,12 @@ class App extends React.Component {
       method: 'GET',
       url: '/budget',
       success: (data) => {
+        var budgetItems = {};
+        data.map((item) => {
+          budgetItems[item.description] = item.amount;
+        });
         this.setState({
-          budgetSettings: data
+          budgetSettings: budgetItems
         });
       },
       error: (err) => {

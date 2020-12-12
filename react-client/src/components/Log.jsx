@@ -7,11 +7,11 @@ const Log = (props) => (
     <table>
       <thead>
         <tr>
-          <th>Description</th><th>Amount</th>
+          <th>Description</th><th>Amount</th><th>Current Week</th>
         </tr>
       </thead>
       <tbody>
-        {props.currentWeekLog.map(stat => <LogItem key={stat.description} stat={stat} budgetSettings={props.budgetSettings}/>)}
+        {props.currentWeekLog.map((stat) => <LogItem key={stat.description} stat={stat} weeklyBudget={props.budgetSettings[stat.description]} overUnder={props.budgetSettings[stat.description] - stat['SUM(amount)']}/>)}
       </tbody>
     </table>
   </div>

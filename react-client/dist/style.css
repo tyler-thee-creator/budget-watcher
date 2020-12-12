@@ -1,5 +1,5 @@
 body{
-  font-family: Sans-serif
+  font-family: Sans-serif;
 }
 
 table, th, td {
@@ -11,5 +11,19 @@ table, th, td {
 }
 
 label {
-  font-style: italic
+  font-style: italic;
+}
+
+#stat-p {
+  text-align: center;
+  color: green;
+}
+
+#stat-n {
+  text-align: center;
+  color: red;
+}
+
+#stat- {
+  text-align: center;
 }

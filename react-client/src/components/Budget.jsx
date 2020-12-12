@@ -10,7 +10,9 @@ const Budget = (props) => (
         </tr>
       </thead>
       <tbody>
-        {props.budgetSettings.map(item => { return <tr key={item.description}><td>{item.description}</td><td>{'$' + item.amount}</td></tr> })}
+        {Object.keys(props.budgetSettings).map((key) => {
+          return <tr key={key}><td>{key}</td><td>{'$' + props.budgetSettings[key]}</td></tr>
+        })}
       </tbody>
     </table>
     <h4>Add a budget item:</h4>
