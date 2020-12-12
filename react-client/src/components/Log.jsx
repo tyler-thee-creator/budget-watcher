@@ -11,7 +11,7 @@ const Log = (props) => (
         </tr>
       </thead>
       <tbody>
-        {props.currentWeekLog.map(stat => <LogItem key={stat.description} stat={stat}/>)}
+        {props.currentWeekLog.map(stat => <LogItem key={stat.description} stat={stat} budgetSettings={props.budgetSettings}/>)}
       </tbody>
     </table>
   </div>

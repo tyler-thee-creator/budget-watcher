@@ -106,7 +106,6 @@ class App extends React.Component {
   }
 
   resetBudget() {
-    console.log('got here')
     $.ajax({
       method: 'DELETE',
       url: '/budget',
@@ -152,7 +151,7 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>Budget Watcher</h1>
-      <Log currentWeekLog={this.state.currentWeekLog}/>
+      <Log currentWeekLog={this.state.currentWeekLog} budgetSettings={this.state.budgetSettings}/>
       <LogEntry updateDescription={this.updateDescription} updateAmount={this.updateAmount} addLog={this.addLog} delete={this.deleteMostRecent}/>
       <Budget budgetSettings={this.state.budgetSettings} addBudgetItem={this.addBudgetItem} updateBudgetDescription={this.updateBudgetDescription} updateBudgetAmount={this.updateBudgetAmount} resetBudget={this.resetBudget}/>
     </div>);
