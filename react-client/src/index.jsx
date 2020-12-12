@@ -72,7 +72,7 @@ class App extends React.Component {
       success: (data) => {
         this.setState({
           currentWeekLog: data
-        })
+        });
       },
       error: (err) => {
         console.log(err);
