@@ -49,13 +49,28 @@ class App extends React.Component {
     e.preventDefault();
   }
 
+  deleteMostRecent() {
+    $.ajax({
+      method: 'DELETE',
+      url: '/log',
+      success: (data) => {
+        this.setState({
+          currentWeekLog: data
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
   componentDidMount() {
     $.ajax({
       method: 'GET',
       url: '/currentWeek',
       success: (data) => {
         this.setState({
-          items: data
+          currentWeekLog: data
         })
       },
       error: (err) => {

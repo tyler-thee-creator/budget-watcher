@@ -13,7 +13,16 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/currentWeek', (req, res) => {
-  res.end();
+  var lastSundayTimestamp = getLastSundayTimestamp();
+  db.getCurrentWeekStats(lastSundayTimestamp, (error, queryResponse) => {
+    if (error) {
+      res.send('error getting current week stats: ' , error);
+      res.end();
+    } else {
+      res.send(queryResponse);
+      res.end();
+    }
+  });
 });
 
 app.post('/log', (req, res) => {

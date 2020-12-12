@@ -16,6 +16,7 @@ const LogEntry = (props) => (
         <input type="submit" onClick={props.addLog}></input>
       </p>
     </form>
+    <button id="delete">Delete most recent entry</button>
   </div>
 );
 
