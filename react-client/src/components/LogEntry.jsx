@@ -13,7 +13,7 @@ const LogEntry = (props) => (
         <input type="number" id="amount" onChange={props.updateAmount}></input>
       </p>
       <p>
-        <input type="submit" onClick={props.addLog}></input>
+        <input id="submitspend" type="submit" onClick={props.addLog}></input>
       </p>
     </form>
     <button id="delete" onClick={props.delete}>Delete most recent entry</button>

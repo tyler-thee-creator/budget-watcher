@@ -75,6 +75,31 @@ app.delete('/log', (req, res) => {
   });
 });
 
+app.post('/budget', (req, res) => {
+  db.deleteOneByDescription(req.body.description, 'budget_settings', (err, deleteResponse) => {
+    if (err) {
+      res.send(err);
+      res.end();
+    } else {
+      db.insertOne({description: "'" + req.body.description + "'", amount: req.body.amount}, 'budget_settings', (err, insertResponse) => {
+        if (err) {
+          console.log(err);
+        } else {
+          db.getAllFromTable('budget_settings', (err, data) => {
+            if (err) {
+              res.send(err);
+              res.end();
+            } else {
+              res.send(data);
+              res.end();
+            }
+          })
+        }
+      });
+    }
+  });
+});
+
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });

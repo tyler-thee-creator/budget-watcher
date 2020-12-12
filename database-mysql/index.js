@@ -49,7 +49,29 @@ var deleteOne = function(id, table, callback) {
   });
 }
 
+var deleteOneByDescription = function(description, table, callback) {
+  connection.query(`DELETE FROM ${table} WHERE description = '${description}';`, function(err, results, fields) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
+var getAllFromTable = function(table, callback) {
+  connection.query(`SELECT * FROM ${table};`, function(err, results, fields) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
 module.exports.insertOne = insertOne;
 module.exports.getCurrentWeekStats = getCurrentWeekStats;
 module.exports.getMostRecentId = getMostRecentId;
 module.exports.deleteOne = deleteOne;
+module.exports.getAllFromTable = getAllFromTable;
+module.exports.deleteOneByDescription = deleteOneByDescription;

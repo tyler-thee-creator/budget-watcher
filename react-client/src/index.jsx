@@ -10,13 +10,19 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentWeekLog: [],
+      budgetSettings: [],
       formSubmitDescription: '',
-      formSubmitAmount: 0
+      formSubmitAmount: 0,
+      formSubmitBudgetDescription: '',
+      formSubmitBudgetAmount: 0
     }
     this.updateDescription = this.updateDescription.bind(this);
     this.updateAmount = this.updateAmount.bind(this);
     this.addLog = this.addLog.bind(this);
     this.deleteMostRecent = this.deleteMostRecent.bind(this);
+    this.addBudgetItem = this.addBudgetItem.bind(this);
+    this.updateBudgetDescription = this.updateBudgetDescription.bind(this);
+    this.updateBudgetAmount = this.updateBudgetAmount.bind(this);
   }
 
   updateDescription(e) {
@@ -28,6 +34,18 @@ class App extends React.Component {
   updateAmount(e) {
     this.setState({
       formSubmitAmount: e.target.value - 0
+    });
+  }
+
+  updateBudgetDescription(e) {
+    this.setState({
+      formSubmitBudgetDescription: e.target.value
+    });
+  }
+
+  updateBudgetAmount(e) {
+    this.setState({
+      formSubmitBudgetAmount: e.target.value - 0
     });
   }
 
@@ -70,16 +88,21 @@ class App extends React.Component {
     $.ajax({
       method: 'POST',
       url: '/budget',
+      data: {
+        description: this.state.formSubmitBudgetDescription,
+        amount: this.state.formSubmitBudgetAmount
+      },
       success: (data) => {
         console.log(data);
         this.setState({
-
+          budgetSettings: data
         });
       },
       error: (err) => {
         console.log(err);
       }
     });
+    e.preventDefault();
   }
 
   componentDidMount() {
@@ -102,7 +125,7 @@ class App extends React.Component {
       <h1>Budget Watcher</h1>
       <Log currentWeekLog={this.state.currentWeekLog}/>
       <LogEntry updateDescription={this.updateDescription} updateAmount={this.updateAmount} addLog={this.addLog} delete={this.deleteMostRecent}/>
-      <Budget />
+      <Budget budgetSettings={this.state.budgetSettings} addBudgetItem={this.addBudgetItem} updateBudgetDescription={this.updateBudgetDescription} updateBudgetAmount={this.updateBudgetAmount}/>
     </div>);
   }
 }
