@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Log from './components/Log.jsx';
 import LogEntry from './components/LogEntry.jsx';
+import Budget from './components/Budget.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -65,6 +66,22 @@ class App extends React.Component {
     });
   }
 
+  addBudgetItem(e) {
+    $.ajax({
+      method: 'POST',
+      url: '/budget',
+      success: (data) => {
+        console.log(data);
+        this.setState({
+
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
   componentDidMount() {
     $.ajax({
       method: 'GET',
@@ -85,6 +102,7 @@ class App extends React.Component {
       <h1>Budget Watcher</h1>
       <Log currentWeekLog={this.state.currentWeekLog}/>
       <LogEntry updateDescription={this.updateDescription} updateAmount={this.updateAmount} addLog={this.addLog} delete={this.deleteMostRecent}/>
+      <Budget />
     </div>);
   }
 }
