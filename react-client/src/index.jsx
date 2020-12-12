@@ -15,6 +15,7 @@ class App extends React.Component {
     this.updateDescription = this.updateDescription.bind(this);
     this.updateAmount = this.updateAmount.bind(this);
     this.addLog = this.addLog.bind(this);
+    this.deleteMostRecent = this.deleteMostRecent.bind(this);
   }
 
   updateDescription(e) {
@@ -61,7 +62,7 @@ class App extends React.Component {
       error: (err) => {
         console.log(err);
       }
-    })
+    });
   }
 
   componentDidMount() {
@@ -74,7 +75,7 @@ class App extends React.Component {
         })
       },
       error: (err) => {
-        console.log('err', err);
+        console.log(err);
       }
     });
   }
@@ -83,8 +84,8 @@ class App extends React.Component {
     return (<div>
       <h1>Budget Watcher</h1>
       <Log currentWeekLog={this.state.currentWeekLog}/>
-      <LogEntry updateDescription={this.updateDescription} updateAmount={this.updateAmount} addLog={this.addLog}/>
-    </div>)
+      <LogEntry updateDescription={this.updateDescription} updateAmount={this.updateAmount} addLog={this.addLog} delete={this.deleteMostRecent}/>
+    </div>);
   }
 }
 

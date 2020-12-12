@@ -14,12 +14,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/currentWeek', (req, res) => {
   var lastSundayTimestamp = getLastSundayTimestamp();
-  db.getCurrentWeekStats(lastSundayTimestamp, (error, queryResponse) => {
-    if (error) {
-      res.send('error getting current week stats: ' , error);
+  db.getCurrentWeekStats(lastSundayTimestamp, (err, data) => {
+    if (err) {
+      res.send('error getting current week stats: ' , err);
       res.end();
     } else {
-      res.send(queryResponse);
+      res.send(data);
       res.end();
     }
   });
@@ -33,15 +33,44 @@ app.post('/log', (req, res) => {
       res.send('error inserting into database: ', err);
       res.end();
     } else {
-      db.getCurrentWeekStats(lastSundayTimestamp, (error, queryResponse) => {
-        if (error) {
-          res.send('error getting current week stats: ' , error);
+      var lastSundayTimestamp = getLastSundayTimestamp();
+      db.getCurrentWeekStats(lastSundayTimestamp, (err, data) => {
+        if (err) {
+          res.send('error getting current week stats: ' , err);
           res.end();
         } else {
-          res.send(queryResponse);
+          res.send(data);
           res.end();
         }
       });
+    }
+  });
+});
+
+app.delete('/log', (req, res) => {
+  db.getMostRecentId((err, data) => {
+    if (err) {
+      res.send('error getting most recent ID: ', err);
+      res.end();
+    } else {
+      var idOfMostRecent = data[0]['MAX(id)'];
+      db.deleteOne(idOfMostRecent, 'historical_log', (err, response) => {
+        if (err) {
+          res.send('error deleting most recent ID: ', err);
+          res.end();
+        } else {
+          var lastSundayTimestamp = getLastSundayTimestamp();
+          db.getCurrentWeekStats(lastSundayTimestamp, (err, data) => {
+            if(err) {
+              res.send('error getting current week stats: ', err);
+              res.end();
+            } else {
+              res.send(data);
+              res.end();
+            }
+          });
+        }
+      })
     }
   });
 });

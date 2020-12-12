@@ -29,5 +29,27 @@ var getCurrentWeekStats = function(startDate, callback) {
   });
 }
 
+var getMostRecentId = function(callback) {
+  connection.query('SELECT MAX(id) FROM historical_log;', function(err, results, fields) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
+var deleteOne = function(id, table, callback) {
+  connection.query(`DELETE FROM ${table} WHERE id = '${id}';`, function(err, results, fields) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
 module.exports.insertOne = insertOne;
 module.exports.getCurrentWeekStats = getCurrentWeekStats;
+module.exports.getMostRecentId = getMostRecentId;
+module.exports.deleteOne = deleteOne;
