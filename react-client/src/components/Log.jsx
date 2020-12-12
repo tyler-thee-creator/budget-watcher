@@ -1,21 +1,19 @@
 import React from 'react';
+import LogItem from './LogItem.jsx';
 
 const Log = (props) => (
   <div>
-    <h4>Log a spend:</h4>
-    <form id="log">
-      <p>
-        <label htmlFor="description">Description: </label>
-        <input type="text" id="description" onChange={props.updateDescription}></input>
-      </p>
-      <p>
-        <label htmlFor="amount">Amount: </label>
-        <input type="number" id="amount" onChange={props.updateAmount}></input>
-      </p>
-      <p>
-        <input type="submit" onClick={props.addLog}></input>
-      </p>
-    </form>
+    <h4> Current Week Overview: </h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Description</th><th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {props.currentWeekLog.map(stat => <LogItem key={stat.description} stat={stat}/>)}
+      </tbody>
+    </table>
   </div>
 );
 

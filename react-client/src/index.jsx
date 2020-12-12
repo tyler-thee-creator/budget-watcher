@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import List from './components/List.jsx';
 import Log from './components/Log.jsx';
+import LogEntry from './components/LogEntry.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentWeekLog: [/*example*/{ id: 1, description: 'hello' }/*example*/],
+      currentWeekLog: [],
       formSubmitDescription: '',
       formSubmitAmount: 0
     }
@@ -38,10 +38,12 @@ class App extends React.Component {
         amount: this.state.formSubmitAmount
       },
       success: (data) => {
-
+        this.setState({
+          currentWeekLog: data
+        });
       },
-      error: () => {
-
+      error: (err) => {
+        console.log(err);
       }
     });
     e.preventDefault();
@@ -65,8 +67,8 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>Budget Watcher</h1>
-      <List currentWeekLog={this.state.currentWeekLog}/>
-      <Log updateDescription={this.updateDescription} updateAmount={this.updateAmount} addLog={this.addLog}/>
+      <Log currentWeekLog={this.state.currentWeekLog}/>
+      <LogEntry updateDescription={this.updateDescription} updateAmount={this.updateAmount} addLog={this.addLog}/>
     </div>)
   }
 }

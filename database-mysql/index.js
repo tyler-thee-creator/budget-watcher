@@ -7,18 +7,7 @@ var connection = mysql.createConnection({
   database : 'logs'
 });
 
-var selectAll = function(callback) {
-  connection.query('SELECT * FROM items', function(err, results, fields) {
-    if(err) {
-      callback(err, null);
-    } else {
-      callback(null, results);
-    }
-  });
-};
-
 var insertOne = function(data, table, callback) {
-  console.log(data);
   var fields = Object.keys(data).join(', ');
   var values = Object.values(data).join(', ');
   connection.query(`INSERT INTO ${table} (${fields}) VALUES (${values});`, function(err, results, fields) {
@@ -30,5 +19,15 @@ var insertOne = function(data, table, callback) {
   });
 }
 
-module.exports.selectAll = selectAll;
+var getCurrentWeekStats = function(startDate, callback) {
+  connection.query(`SELECT description, SUM(amount) FROM historical_log WHERE date >= '${startDate}' GROUP BY description ORDER BY SUM(amount) DESC;`, function(err, results, fields) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
 module.exports.insertOne = insertOne;
+module.exports.getCurrentWeekStats = getCurrentWeekStats;
