@@ -1,0 +1,15 @@
+body{
+  font-family: Sans-serif
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+#table-headers {
+  text-decoration: underline;
+}
+
+label {
+  font-style: italic
+}

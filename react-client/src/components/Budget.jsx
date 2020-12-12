@@ -2,7 +2,7 @@ import React from 'react';
 
 const Budget = (props) => (
   <div>
-    <h3>Current Budget</h3>
+    <h3 id="table-headers">Current Budget:</h3>
     <table>
       <thead>
         <tr>

@@ -3,7 +3,7 @@ import LogItem from './LogItem.jsx';
 
 const Log = (props) => (
   <div>
-    <h3> Current Week Overview: </h3>
+    <h3 id="table-headers"> Current Week Overview: </h3>
     <table>
       <thead>
         <tr>
