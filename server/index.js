@@ -106,6 +106,7 @@ app.get('/budget', (req, res) => {
       res.send(err);
       res.end();
     } else {
+      console.log(data);
       res.send(data);
       res.end();
     }
